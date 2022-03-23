@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
+import TextField from "@mui/material/TextField";
 
 import { searchMoviesByTitle } from "./lib/movies";
 
@@ -87,12 +88,14 @@ function App() {
   return (
     <div className="App">
       <div id="searchMovie">
-        Search Movie:{" "}
-        <input
-          onChange={handleInputChange}
-          type="text"
+        <TextField
+          id="outlined-basic"
+          label="Search for Movies & TV Series"
+          size="small"
+          variant="filled"
           value={inputMovie}
           disabled={loading}
+          onChange={handleInputChange}
         />
       </div>
       <div className="movies-container">{renderMovies()}</div>
