@@ -6,11 +6,21 @@ function Item({ title, poster }) {
     <Box
       sx={{
         position: "relative",
+        cursor: "pointer",
+        transition: "all ease-in-out 0.3s",
+        ":hover": {
+          transform: "scale(1.05)",
+        },
       }}
     >
       <Box
         component="img"
-        sx={{ display: "block", width: "100%" }}
+        sx={{
+          display: "block",
+          width: "100%",
+          height: "300px",
+          objectFit: "cover",
+        }}
         src={poster}
         alt={title}
       />

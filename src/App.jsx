@@ -4,6 +4,7 @@ import TextField from "@mui/material/TextField";
 import { searchMoviesByTitle } from "./lib/movies";
 import GlobalStyles from "@mui/material/GlobalStyles";
 import Grid from "@mui/material/Grid";
+import Pagination from "@mui/material/Pagination";
 
 import MovieItem from "../src/components/Movie/Item";
 
@@ -14,7 +15,7 @@ function App() {
 
   // Movies
   const [loading, setLoading] = useState(false);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState({});
 
   useEffect(() => {
     if (value !== "") {
@@ -28,23 +29,10 @@ function App() {
     }
   }, [value]);
 
-  const fetchNextPage = () => {
-    const nextPage = movies.Paging.nextPage;
-    if (nextPage === null) return;
-
+  const fetchPage = (page) => {
     setLoading(true);
-    searchMoviesByTitle(value, nextPage).then((data) => {
-      setMovies(data);
-      setLoading(false);
-    });
-  };
-
-  const fetchPrevPage = () => {
-    const prevPage = movies.Paging.prevPage;
-    if (prevPage === null) return;
-
-    setLoading(true);
-    searchMoviesByTitle(value, prevPage).then((data) => {
+    searchMoviesByTitle(value, page).then((data) => {
+      console.log(data);
       setMovies(data);
       setLoading(false);
     });
@@ -52,6 +40,10 @@ function App() {
 
   const handleInputChange = (e) => {
     setInputMovie(e.target.value);
+  };
+
+  const handlePaginationChange = (e, page) => {
+    fetchPage(page);
   };
 
   const renderMovies = () => {
@@ -71,29 +63,17 @@ function App() {
   };
 
   const renderPagination = () => {
-    if (movies.Response === "True") {
-      return (
-        <>
-          {movies.Paging.prevPage ? (
-            <button onClick={fetchPrevPage}>
-              Previous Page: {movies.Paging.prevPage}
-            </button>
-          ) : null}
-
-          <button>Current Page: {movies.Paging.currentPage}</button>
-
-          {movies.Paging.nextPage ? (
-            <button onClick={fetchNextPage}>
-              Next Page: {movies.Paging.nextPage}
-            </button>
-          ) : null}
-
-          {movies.Paging.totalPages !== movies.Paging.currentPage ? (
-            <button>Last Page: {movies.Paging.totalPages}</button>
-          ) : null}
-        </>
-      );
-    }
+    if (movies.Response === "False") return;
+    if (Object.keys(movies).length === 0) return null;
+    return (
+      <>
+        <Pagination
+          count={movies.Paging.totalPages}
+          onChange={handlePaginationChange}
+          color="primary"
+        />
+      </>
+    );
   };
 
   return (
