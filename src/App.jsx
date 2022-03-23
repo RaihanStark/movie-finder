@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import TextField from "@mui/material/TextField";
-
 import { searchMoviesByTitle } from "./lib/movies";
+import GlobalStyles from "@mui/material/GlobalStyles";
+import Grid from "@mui/material/Grid";
+
+import MovieItem from "../src/components/Movie/Item";
 
 function App() {
   // Input
@@ -54,7 +57,15 @@ function App() {
   const renderMovies = () => {
     if (movies.Response === "True") {
       return movies.Search.map((movie) => {
-        return <div key={movie.imdbID}>{movie.Title}</div>;
+        return (
+          <Grid item md={3} lg={2}>
+            <MovieItem
+              key={movie.imdbID}
+              title={movie.Title}
+              poster={movie.Poster}
+            />
+          </Grid>
+        );
       });
     }
   };
@@ -86,21 +97,38 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div id="searchMovie">
-        <TextField
-          id="outlined-basic"
-          label="Search for Movies & TV Series"
-          size="small"
-          variant="filled"
-          value={inputMovie}
-          disabled={loading}
-          onChange={handleInputChange}
-        />
+    <>
+      <GlobalStyles
+        styles={{
+          body: {
+            fontFamily: "Roboto, sans-serif",
+          },
+        }}
+      />
+      <div className="App">
+        <div id="searchMovie">
+          <TextField
+            id="outlined-basic"
+            label="Search for Movies & TV Series"
+            size="small"
+            variant="filled"
+            value={inputMovie}
+            disabled={loading}
+            onChange={handleInputChange}
+          />
+        </div>
+        <Grid
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          spacing={2}
+        >
+          {renderMovies()}
+        </Grid>
+        {renderPagination()}
       </div>
-      <div className="movies-container">{renderMovies()}</div>
-      {renderPagination()}
-    </div>
+    </>
   );
 }
 
