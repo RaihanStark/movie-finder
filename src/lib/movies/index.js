@@ -40,3 +40,22 @@ export const searchMoviesByTitle = async (title, page = 1) => {
     }
   });
 };
+
+export const getMoviesById = async (id) => {
+  // Prepare Data
+  const { data } = await api.get("/", {
+    params: {
+      i: id,
+      plot: "full",
+    },
+  });
+
+  // Create Promises
+  return new Promise((resolve, reject) => {
+    if (data.Response === "True") {
+      resolve(data);
+    } else {
+      reject(data.Error);
+    }
+  });
+};
