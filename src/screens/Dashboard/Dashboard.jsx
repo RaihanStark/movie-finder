@@ -1,45 +1,36 @@
 import { useEffect, useState } from "react";
-import { useDebounce } from "use-debounce";
-import TextField from "@mui/material/TextField";
+
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 
+import MovieSearch from "../../components/Movie/Search/Search";
 import MovieItem from "../../components/Movie/Item";
 import { searchMoviesByTitle } from "../../lib/movies";
 import { Link } from "react-router-dom";
 
 function Dashboard() {
-  // Input
-  const [inputMovie, setInputMovie] = useState("");
-  const [value] = useDebounce(inputMovie, 1000);
-
   // Movies
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState({});
-
-  useEffect(() => {
-    if (value !== "") {
-      console.log("fetch", value);
-      setLoading(true);
-      searchMoviesByTitle(value, 1).then((data) => {
-        console.log(data);
-        setMovies(data);
-        setLoading(false);
-      });
-    }
-  }, [value]);
+  const [valueDebounce, setValueDebounce] = useState("");
 
   const fetchPage = (page) => {
     setLoading(true);
-    searchMoviesByTitle(value, page).then((data) => {
+    searchMoviesByTitle(valueDebounce, page).then((data) => {
       console.log(data);
       setMovies(data);
       setLoading(false);
     });
   };
 
-  const handleInputChange = (e) => {
-    setInputMovie(e.target.value);
+  const searchMovies = async (value) => {
+    console.log("fetch", value);
+    setLoading(true);
+    const data = await searchMoviesByTitle(value, 1);
+    console.log(data);
+    setMovies(data);
+    setLoading(false);
+    setValueDebounce(value);
   };
 
   const handlePaginationChange = (e, page) => {
@@ -50,7 +41,7 @@ function Dashboard() {
     if (movies.Response === "True") {
       return movies.Search.map((movie) => {
         return (
-          <Grid item md={3} lg={2}>
+          <Grid item md={3} lg={2} key={movie.imdbID}>
             <Link to={`/detail/${movie.imdbID}`}>
               <MovieItem
                 key={movie.imdbID}
@@ -70,6 +61,12 @@ function Dashboard() {
     return (
       <>
         <Pagination
+          sx={{
+            marginTop: "1rem",
+            marginBottom: "1rem",
+            display: "flex",
+            justifyContent: "center",
+          }}
           count={movies.Paging.totalPages}
           onChange={handlePaginationChange}
           color="primary"
@@ -79,17 +76,7 @@ function Dashboard() {
   };
   return (
     <>
-      <div id="searchMovie">
-        <TextField
-          id="outlined-basic"
-          label="Search for Movies & TV Series"
-          size="small"
-          variant="filled"
-          value={inputMovie}
-          disabled={loading}
-          onChange={handleInputChange}
-        />
-      </div>
+      <MovieSearch searchMovies={searchMovies} />
       <Grid
         container
         direction="row"
