@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Chip from "@mui/material/Chip";
 
+import MovieImage from "./Image";
+
 function Item({ title, poster, type }) {
   return (
     <Box
@@ -15,21 +17,7 @@ function Item({ title, poster, type }) {
         },
       }}
     >
-      <Box
-        component="img"
-        sx={{
-          display: "block",
-          width: "100%",
-          height: "300px",
-          objectFit: "cover",
-        }}
-        src={
-          poster === "N/A"
-            ? "https://cinemaone.net/images/movie_placeholder.png"
-            : poster
-        }
-        alt={title}
-      />
+      <MovieImage poster={poster} title={title} />
 
       <Chip
         label={type.toUpperCase()}

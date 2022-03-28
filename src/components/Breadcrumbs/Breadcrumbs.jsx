@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 
 function BreadcrumbsComponent({ currentPath = "..." }) {
   return (
-    <Breadcrumbs aria-label="breadcrumb">
+    <Breadcrumbs
+      aria-label="breadcrumb"
+      sx={{
+        marginBottom: "0.5rem",
+      }}
+    >
       <Link
         to="/"
         style={{ textDecoration: "none", color: "black", opacity: "0.6" }}

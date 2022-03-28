@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getMoviesById } from "../../lib/movies";
 
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-
+import MovieDetail from "../../components/Movie/Detail/Detail";
 function Detail() {
   const { imdbID } = useParams();
   const [movie, setMovie] = useState({});
@@ -22,11 +22,7 @@ function Detail() {
   const renderDetail = () => {
     if (Object.keys(movie).length === 0) return null;
 
-    return (
-      <>
-        <h1>{movie.Title}</h1>
-      </>
-    );
+    return <MovieDetail data={movie} />;
   };
 
   const renderLoading = () => {

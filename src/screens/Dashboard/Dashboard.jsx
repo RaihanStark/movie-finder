@@ -90,14 +90,14 @@ function Dashboard() {
   };
 
   const renderContent = () => {
-    if (Object.keys(movies).length === 0) return <MovieEmpty />;
     if (loading) return <h1>Loading...</h1>;
+    if (Object.keys(movies).length === 0) return <MovieEmpty />;
     if (movies.Response === "False") return <MovieEmpty error={movies.Error} />;
     return renderMovies();
   };
   return (
     <>
-      <MovieSearch searchMovies={searchMovies} />
+      <MovieSearch searchMovies={searchMovies} loading={loading} />
       <Grid
         container
         direction="row"

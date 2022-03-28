@@ -5,7 +5,7 @@ import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 
-function Search({ searchMovies }) {
+function Search({ searchMovies, loading }) {
   const [inputMovie, setInputMovie] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [value] = useDebounce(inputMovie, 1000);
@@ -40,6 +40,7 @@ function Search({ searchMovies }) {
         size="normal"
         onFocus={handleInputOnFocus}
         onBlur={handleInputOnBlur}
+        disabled={loading}
       >
         <InputLabel
           htmlFor="input-with-icon-adornment"
