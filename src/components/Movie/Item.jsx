@@ -1,7 +1,9 @@
 import React from "react";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Chip from "@mui/material/Chip";
 
-function Item({ title, poster }) {
+function Item({ title, poster, type }) {
   return (
     <Box
       sx={{
@@ -24,16 +26,36 @@ function Item({ title, poster }) {
         src={poster}
         alt={title}
       />
-      <Box
+
+      <Chip
+        label={type.toUpperCase()}
+        color={type === "movie" ? "error" : "secondary"}
+        size="small"
         sx={{
           position: "absolute",
-          bottom: 0,
+          top: "0.5rem",
+          right: "0.5rem",
+        }}
+      />
+      <Box
+        sx={{
           width: "100%",
-          color: "white",
-          backdropFilter: "blur(10px)",
+          color: "black",
+          paddingTop: "1rem",
+          paddingBottom: "1rem",
+          textAlign: "center",
         }}
       >
-        <h3>{title}</h3>
+        <Typography
+          component="h4"
+          sx={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {title}
+        </Typography>
       </Box>
     </Box>
   );

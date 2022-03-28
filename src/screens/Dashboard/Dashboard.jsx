@@ -41,12 +41,26 @@ function Dashboard() {
     if (movies.Response === "True") {
       return movies.Search.map((movie) => {
         return (
-          <Grid item md={3} lg={2} key={movie.imdbID}>
-            <Link to={`/detail/${movie.imdbID}`}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            md={3}
+            lg={2}
+            key={movie.imdbID}
+            sx={{
+              height: "100%",
+            }}
+          >
+            <Link
+              to={`/detail/${movie.imdbID}`}
+              style={{ textDecoration: "none" }}
+            >
               <MovieItem
                 key={movie.imdbID}
                 title={movie.Title}
                 poster={movie.Poster}
+                type={movie.Type}
               />
             </Link>
           </Grid>
