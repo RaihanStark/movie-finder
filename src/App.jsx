@@ -1,5 +1,6 @@
 import GlobalStyles from "@mui/material/GlobalStyles";
 import { Routes, Route } from "react-router-dom";
+import Container from "@mui/material/Container";
 
 import Navbar from "./components/Navbar/Navbar";
 import ScreensDetail from "./screens/Detail/Detail";
@@ -18,11 +19,12 @@ function App() {
       />
 
       <Navbar />
-
-      <Routes>
-        <Route path="/" element={<ScreensDashboard />} />
-        <Route path="detail/:imdbID" element={<ScreensDetail />} />
-      </Routes>
+      <Container>
+        <Routes>
+          <Route path="/" element={<ScreensDashboard />} />
+          <Route path="detail/:imdbID" element={<ScreensDetail />} />
+        </Routes>
+      </Container>
     </>
   );
 }
