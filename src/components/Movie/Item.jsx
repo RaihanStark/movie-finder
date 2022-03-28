@@ -23,7 +23,11 @@ function Item({ title, poster, type }) {
           height: "300px",
           objectFit: "cover",
         }}
-        src={poster}
+        src={
+          poster === "N/A"
+            ? "https://cinemaone.net/images/movie_placeholder.png"
+            : poster
+        }
         alt={title}
       />
 

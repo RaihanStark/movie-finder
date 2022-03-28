@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-
+import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 
+import MovieEmpty from "../../components/Movie/Empty/Empty";
 import MovieSearch from "../../components/Movie/Search/Search";
 import MovieItem from "../../components/Movie/Item";
 import { searchMoviesByTitle } from "../../lib/movies";
-import { Link } from "react-router-dom";
 
 function Dashboard() {
   // Movies
@@ -88,6 +88,13 @@ function Dashboard() {
       </>
     );
   };
+
+  const renderContent = () => {
+    if (Object.keys(movies).length === 0) return <MovieEmpty />;
+    if (loading) return <h1>Loading...</h1>;
+    if (movies.Response === "False") return <MovieEmpty error={movies.Error} />;
+    return renderMovies();
+  };
   return (
     <>
       <MovieSearch searchMovies={searchMovies} />
@@ -98,7 +105,7 @@ function Dashboard() {
         alignItems="center"
         spacing={2}
       >
-        {renderMovies()}
+        {renderContent()}
       </Grid>
       {renderPagination()}
     </>
