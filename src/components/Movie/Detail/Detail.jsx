@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
+import CameraRollIcon from "@mui/icons-material/CameraRoll";
 import MovieImage from "../Image";
 import Divider from "@mui/material/Divider";
 
@@ -75,6 +76,18 @@ function Detail({ data }) {
           >
             <WatchLaterIcon fontSize="small" /> {data.Runtime}
           </Box>
+          {data.totalSeasons ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.25rem",
+                color: "gray.light",
+              }}
+            >
+              <CameraRollIcon fontSize="small" /> {data.totalSeasons} Seasons
+            </Box>
+          ) : null}
           <Box
             sx={{
               display: "flex",
