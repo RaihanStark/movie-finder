@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import CameraRollIcon from "@mui/icons-material/CameraRoll";
-import MovieImage from "../Image";
+import MovieImage from "./Image";
 import Divider from "@mui/material/Divider";
 
 import Grid from "@mui/material/Grid";

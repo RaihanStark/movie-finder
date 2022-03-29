@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Pagination from "@mui/material/Pagination";
 
-import MovieEmpty from "../../components/Movie/Empty/Empty";
-import MovieSearch from "../../components/Movie/Search/Search";
+import MovieEmpty from "../../components/Movie/Empty";
+import MovieSearch from "../../components/Movie/Search";
 import MovieItem from "../../components/Movie/Item";
 import { searchMoviesByTitle } from "../../lib/movies";
 
