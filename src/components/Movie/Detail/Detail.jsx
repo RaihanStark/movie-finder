@@ -2,6 +2,14 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import MovieImage from "../Image";
+import Divider from "@mui/material/Divider";
+
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListSubheader from "@mui/material/ListSubheader";
+import ListItemText from "@mui/material/ListItemText";
+
 function Detail({ data }) {
   const renderCategory = () => {
     return data.Genre.split(", ").map((genre) => {
@@ -88,6 +96,31 @@ function Detail({ data }) {
         <Box>
           <b>Actors:</b> {data.Actors}
         </Box>
+
+        <Divider
+          sx={{
+            margin: "1rem 0",
+          }}
+        />
+
+        <h2
+          style={{
+            margin: 0,
+          }}
+        >
+          Ratings
+        </h2>
+
+        <List>
+          {data.Ratings.map((rating) => {
+            return (
+              <ListItem key={rating.source} disablePadding>
+                <ListItemText primary={rating.Source} />
+                <Chip label={rating.Value} size="small" color="secondary" />
+              </ListItem>
+            );
+          })}
+        </List>
       </Box>
     </Box>
   );
