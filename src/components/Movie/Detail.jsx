@@ -127,13 +127,15 @@ function Detail({ data }) {
           }}
         />
 
-        <h2
-          style={{
-            margin: 0,
-          }}
-        >
-          Ratings
-        </h2>
+        {data.Ratings.length > 0 && (
+          <h2
+            style={{
+              margin: 0,
+            }}
+          >
+            Ratings
+          </h2>
+        )}
 
         <List>
           {data.Ratings.map((rating, i) => {
