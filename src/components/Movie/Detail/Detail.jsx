@@ -4,10 +4,9 @@ import WatchLaterIcon from "@mui/icons-material/WatchLater";
 import MovieImage from "../Image";
 import Divider from "@mui/material/Divider";
 
+import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListSubheader from "@mui/material/ListSubheader";
 import ListItemText from "@mui/material/ListItemText";
 
 function Detail({ data }) {
@@ -18,23 +17,28 @@ function Detail({ data }) {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <Box
+    <Grid container sx={{ display: "flex" }}>
+      <Grid
+        item
         sx={{
           width: "100%",
         }}
+        sm={6}
+        md={4}
       >
         <MovieImage
           poster={data.Poster}
           title={data.Title}
           sx={{
             width: "100%",
-            height: "100%",
           }}
         />
-      </Box>
+      </Grid>
 
-      <Box
+      <Grid
+        item
+        sm={6}
+        md={8}
         sx={{
           padding: "0.5rem 1rem",
         }}
@@ -121,8 +125,8 @@ function Detail({ data }) {
             );
           })}
         </List>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }
 

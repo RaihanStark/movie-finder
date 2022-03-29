@@ -8,7 +8,7 @@ function BreadcrumbsComponent({ currentPath = "..." }) {
     <Breadcrumbs
       aria-label="breadcrumb"
       sx={{
-        marginBottom: "0.5rem",
+        marginBottom: "1rem",
       }}
     >
       <Link
