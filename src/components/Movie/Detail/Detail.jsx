@@ -13,7 +13,14 @@ import ListItemText from "@mui/material/ListItemText";
 function Detail({ data }) {
   const renderCategory = () => {
     return data.Genre.split(", ").map((genre) => {
-      return <Chip label={genre} size="small" sx={{ marginRight: "0.5rem" }} />;
+      return (
+        <Chip
+          key={genre}
+          label={genre}
+          size="small"
+          sx={{ marginRight: "0.5rem" }}
+        />
+      );
     });
   };
 
@@ -129,9 +136,9 @@ function Detail({ data }) {
         </h2>
 
         <List>
-          {data.Ratings.map((rating) => {
+          {data.Ratings.map((rating, i) => {
             return (
-              <ListItem key={rating.source} disablePadding>
+              <ListItem key={i} disablePadding>
                 <ListItemText primary={rating.Source} />
                 <Chip label={rating.Value} size="small" color="secondary" />
               </ListItem>
