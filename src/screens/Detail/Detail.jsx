@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { getMoviesById } from "../../lib/movies";
 
 import Breadcrumbs from "../../components/Breadcrumbs/Breadcrumbs";
-import MovieDetail from "../../components/Movie/Detail/Detail";
+import MovieDetail from "../../components/Movie/Detail";
 function Detail() {
   const { imdbID } = useParams();
   const [movie, setMovie] = useState({});
