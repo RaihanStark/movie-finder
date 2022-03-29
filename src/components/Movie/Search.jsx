@@ -8,7 +8,7 @@ import Input from "@mui/material/Input";
 function Search({ searchMovies, loading }) {
   const [inputMovie, setInputMovie] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const [value] = useDebounce(inputMovie, 1000);
+  const [value] = useDebounce(inputMovie, 500);
 
   useEffect(() => {
     if (value === "") return;
