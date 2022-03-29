@@ -11,6 +11,8 @@ function Empty({ error = "" }) {
         textAlign: "center",
         alignItems: "center",
         marginTop: "2.5rem",
+        marginLeft: "1rem",
+        marginRight: "1rem",
       }}
     >
       <MovieIcon sx={{ fontSize: "10rem" }} />

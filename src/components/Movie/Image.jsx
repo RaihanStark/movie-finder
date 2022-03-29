@@ -15,6 +15,9 @@ function Image({
         display: "block",
         objectFit: "cover",
         ...sx,
+        "@media (max-width: 598.98px)": {
+          height: "auto",
+        },
       }}
       src={
         poster === "N/A"
